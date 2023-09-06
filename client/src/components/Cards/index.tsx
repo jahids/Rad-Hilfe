@@ -1,5 +1,9 @@
+
+/* eslint-disable  */
 import { Box, Card, Center, CircularProgress, Flex, Text } from '@chakra-ui/react';
 import HealthRadialChart from '../../components/HealthRadialChart';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const setCard = ({
   health,
@@ -26,8 +30,20 @@ const setCard = ({
   fontWeight: string;
   fontSize: string;
 }) => {
+
+  const navigate = useNavigate();
+
+  const [healthState, sethealthState] = useState<any>(null)
+
+  useEffect(() => {
+    sethealthState(health)
+  
+  }, [healthState, health])
+  
+
   return (
-    <Card
+    <div onClick={()=>navigate("/bike-health")}>
+      <Card
       w={w}
       h={h}
       color={color}
@@ -45,7 +61,7 @@ const setCard = ({
             </Text>
 
             <Text fontSize={'1rem'} position={'absolute'} right={'43px'}>
-              {health}%
+              {healthState ? healthState : "loading.."}%
             </Text>
 
             <CircularProgress color={'#001F3F'} value={health} size='5.5rem' mr={5} />
@@ -58,6 +74,7 @@ const setCard = ({
         </Text>
       )}
     </Card>
+    </div>
   );
 };
 

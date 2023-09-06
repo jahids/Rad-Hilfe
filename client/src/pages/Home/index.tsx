@@ -1,3 +1,4 @@
+/* eslint-disable  */
 import { Flex, Grid, GridItem, Text, Box, Image } from '@chakra-ui/react';
 import Cards from '../../components/Cards';
 import { FaCloud } from 'react-icons/fa';
@@ -76,7 +77,7 @@ const Home = () => {
 
   const [locationData, setLocationData] = useState(initialState);
   const [currentWeather, setCurrentWeather] = useState(initialWeather);
-  let userLoctaion = navigator.geolocation;
+  const userLoctaion = navigator.geolocation;
   function myGeolocator() {
     if (userLoctaion) {
       userLoctaion.getCurrentPosition(success);
@@ -88,8 +89,8 @@ const Home = () => {
       latitude: any;
     };
   }) {
-    let latitude = data.coords.latitude;
-    let longitude = data.coords.longitude;
+    const latitude = data.coords.latitude;
+    const longitude = data.coords.longitude;
 
     setLocationData({ longitude, latitude });
   }

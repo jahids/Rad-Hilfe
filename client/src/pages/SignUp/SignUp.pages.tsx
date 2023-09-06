@@ -1,3 +1,4 @@
+/* eslint-disable  */
 import { Image, Box, Center, Flex, HStack, Heading, Stack, Text, useToast } from '@chakra-ui/react';
 import { ChangeEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -26,23 +27,6 @@ import {
 import auth, { googleProvider } from '../../firebase.init';
 
 const SignUp = () => {
-<<<<<<< HEAD
-	const navigate = useNavigate();
-	const dispatch = useAppDispatch();
-	const toast = useToast();
-	const [errorMessage, setErrorMessage] = useState('');
-	const validate = (value: any) => {
-		if (
-			validator.isStrongPassword(value, {
-				minLength: 6,
-				minLowercase: 1,
-				minUppercase: 1,
-				minNumbers: 1,
-				minSymbols: 1,
-			})
-		) {
-			setErrorMessage(' Strong Password');
-=======
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const toast = useToast();
@@ -59,7 +43,6 @@ const SignUp = () => {
       })
     ) {
       setErrorMessage(' Strong Password');
->>>>>>> f4150f53833e8aaea96d37085ee87cd905097831
 
 			setTimeout(() => {
 				setErrorMessage('');
@@ -103,11 +86,6 @@ const SignUp = () => {
 		}
 	};
 
-<<<<<<< HEAD
-	const handleGoogleAuth = async (event: any) => {
-		event.preventDefault();
-	};
-=======
   const handleGoogleAuth = async (event: any) => {
     event.preventDefault();
     try {
@@ -184,11 +162,8 @@ const SignUp = () => {
   const handleFacebookAuth = async (event: any) => {
     event.preventDefault();
   };
->>>>>>> f4150f53833e8aaea96d37085ee87cd905097831
 
-	const handleFacebookAuth = async (event: any) => {
-		event.preventDefault();
-	};
+
 
 	return (
 		<Box p={4}>
