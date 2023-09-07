@@ -41,9 +41,26 @@ const getSession = (token: string) => {
   }
 };
 
+const decodeJWT = (token : string)=>{
+  try {
+    
+
+    const tokenData  = jwt.verify(
+      token,
+      SECRET_KEY
+    ) as unknown as SessionData;
+
+
+    return tokenData;
+  } catch (error) {
+    console.error('Error verifying token:', error);
+    return undefined;
+  }
+}
+
 const destroySession = (token: string): boolean => {
   blockedList.push(token);
   return true;
 };
 
-export { createSession, getSession, destroySession };
+export { createSession, getSession, destroySession , decodeJWT };

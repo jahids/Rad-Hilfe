@@ -21,6 +21,8 @@ const sessionManagement_1 = require("../../middlewares/sessionManagement");
 const cyclist_query_1 = require("../../models/cyclist/cyclist.query");
 const subparts_json_1 = __importDefault(require("../../models/bicycle/subparts.json"));
 const setUpBicycle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // console.log(`********************************** i am here `);
+    // return res.send("nigga")
     try {
         const { brand, model, serialNumber, purchaseMonth, purchaseYear, isRevised, revisionMonth, revisionYear, dailyCommute, recreationalCommute, } = req.body;
         const newBicycle = {
@@ -42,9 +44,13 @@ const setUpBicycle = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             revisionMonth && (lastRevisionMonth = revisionMonth);
             revisionYear && (lastRevisionYear = revisionYear);
         }
-        const lastRevisionDate = (0, moment_1.default)([lastRevisionYear, lastRevisionMonth - 1]);
+        const lastRevisionDate = (0, moment_1.default)([
+            lastRevisionYear,
+            lastRevisionMonth - 1,
+        ]);
         const createdBicycle = yield (0, bicycle_query_1.createBicycle)(newBicycle, lastRevisionDate);
         const token = req.cookies.accessToken;
+        // console.log("fr token", token);
         const session = (0, sessionManagement_1.getSession)(token);
         if (session && createdBicycle) {
             const bicycleId = new database_1.Types.ObjectId(createdBicycle._id);
@@ -52,11 +58,11 @@ const setUpBicycle = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             res.status(201).send(createdBicycle);
             return;
         }
-        res.status(401).send('Session Unavailable!');
+        res.status(401).send("Session Unavailable!+");
     }
     catch (error) {
         console.log(error);
-        res.status(500).send('Server Error!');
+        res.status(500).send("Server Error!");
     }
 });
 exports.setUpBicycle = setUpBicycle;
@@ -65,7 +71,7 @@ const getBicycle = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const bicycleId = req.params.id;
         const bicycle = yield (0, bicycle_query_1.getBicycleById)(new database_1.Types.ObjectId(bicycleId));
         if (!bicycle) {
-            return res.status(401).send('Failed to find bicycle!');
+            return res.status(401).send("Failed to find bicycle!");
         }
         res.status(200).send(bicycle);
     }
@@ -79,14 +85,14 @@ const getBicycleHealth = (req, res) => __awaiter(void 0, void 0, void 0, functio
         const bicycleId = req.params.id;
         const bicycle = yield (0, bicycle_query_1.findBicycleHealthById)(new database_1.Types.ObjectId(bicycleId));
         if (!bicycle) {
-            res.status(401).send('Failed to find bicycle!');
+            res.status(401).send("Failed to find bicycle!");
             return;
         }
         res.status(200).send(bicycle);
     }
     catch (error) {
         console.error(error);
-        res.status(500).send('Server Error!');
+        res.status(500).send("Server Error!");
     }
 });
 exports.getBicycleHealth = getBicycleHealth;
@@ -94,7 +100,7 @@ const setUpBicycleEdit = (req, res) => __awaiter(void 0, void 0, void 0, functio
     try {
         const bicycleId = req.params.id;
         if (!bicycleId)
-            res.status(401).send('Failed to find bicycle!');
+            res.status(401).send("Failed to find bicycle!");
         const { brand, model, serialNumber, purchaseMonth, purchaseYear, isRevised, revisionMonth, revisionYear, dailyCommute, recreationalCommute, } = req.body;
         const newBicycle = {
             brand,
@@ -114,7 +120,10 @@ const setUpBicycleEdit = (req, res) => __awaiter(void 0, void 0, void 0, functio
             revisionMonth && (lastRevisionMonth = revisionMonth);
             revisionYear && (lastRevisionYear = revisionYear);
         }
-        const lastRevisionDate = (0, moment_1.default)([lastRevisionYear, lastRevisionMonth - 1]);
+        const lastRevisionDate = (0, moment_1.default)([
+            lastRevisionYear,
+            lastRevisionMonth - 1,
+        ]);
         const updatedBicycle = yield (0, bicycle_query_1.updateBicycle)(new database_1.Types.ObjectId(bicycleId), newBicycle, lastRevisionDate);
         const token = req.cookies.accessToken;
         const session = (0, sessionManagement_1.getSession)(token);
@@ -122,11 +131,11 @@ const setUpBicycleEdit = (req, res) => __awaiter(void 0, void 0, void 0, functio
             res.status(201).send(updatedBicycle);
             return;
         }
-        res.status(401).send('Session Unavailable!');
+        res.status(401).send("Session Unavailable!");
     }
     catch (error) {
         console.log(error);
-        res.status(500).send('Server Error!');
+        res.status(500).send("Server Error!");
     }
 });
 exports.setUpBicycleEdit = setUpBicycleEdit;
@@ -135,7 +144,7 @@ const bicycleDamagedPart = (req, res) => __awaiter(void 0, void 0, void 0, funct
         let bicycleId = req.params.id;
         console.log(bicycleId);
         if (!bicycleId) {
-            res.status(401).send('Failed to find bicycle!');
+            res.status(401).send("Failed to find bicycle!");
             return;
         }
         const damagedParts = yield (0, bicycle_query_1.getAllDamagedParts)(new database_1.Types.ObjectId(bicycleId));
@@ -160,7 +169,7 @@ const bicycleDamagedPart = (req, res) => __awaiter(void 0, void 0, void 0, funct
     }
     catch (error) {
         console.log(error);
-        res.status(500).send('Server Error!');
+        res.status(500).send("Server Error!");
     }
 });
 exports.bicycleDamagedPart = bicycleDamagedPart;

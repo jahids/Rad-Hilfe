@@ -367,10 +367,14 @@ const signIn = async (req: Request, res: Response) => {
 		}
 
 		const token = createSession(email);
+		
+		const THIRTY_DAYS = 30 * 24*3600000;
 		res.cookie("accessToken", token, {
-			httpOnly: false,
-			secure: false,
-			sameSite: "strict",
+			// httpOnly: false,
+			// secure: false,
+			// sameSite: "strict",
+			httpOnly:true,
+            maxAge : THIRTY_DAYS
 		});
 
 		res.status(200).send({ accessToken: token });

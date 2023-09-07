@@ -8,6 +8,8 @@ import mongoose from 'mongoose';
 dotenv.config({ path: __dirname + '/.env' });
 // dotenv.config();
 
+console.clear();
+console.log(`Time : ${new Date().toLocaleTimeString()}`);
 const app: Application = express();
 
 const corsConfig = {

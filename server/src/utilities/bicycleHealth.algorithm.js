@@ -73,22 +73,25 @@ const getDistance = (way, lastMaintainedDate, rodeDay, rodeDistance, rideFactor)
 };
 const bicycleHealthAlgorithm = () => __awaiter(void 0, void 0, void 0, function* () {
     const allBicycle = yield (0, bicycle_query_1.getAllBicycle)();
+    // return 0;
     allBicycle &&
         allBicycle.forEach((bicycle) => {
+            var _a, _b, _c, _d, _e, _f, _g, _h;
             let lastRevisionMonth = bicycle.purchaseMonth;
             let lastRevisionYear = bicycle.purchaseYear;
             if (bicycle.isRevised) {
                 bicycle.revisionMonth && (lastRevisionMonth = bicycle.revisionMonth);
                 bicycle.revisionYear && (lastRevisionYear = bicycle.revisionYear);
             }
+            console.log(`all bicycle list 1=`, allBicycle === null || allBicycle === void 0 ? void 0 : allBicycle.length);
             bicycle.bicycleParts &&
-                calculatePartsHealth(bicycle.bicycleParts, bicycle.dailyCommute.days.length, bicycle.dailyCommute.totalDistance, bicycle.dailyCommute.unpavedRoad, !!bicycle.recreationalCommute, bicycle.recreationalCommute.days.length, bicycle.recreationalCommute.lengthOfRide, bicycle.recreationalCommute.activityType);
+                calculatePartsHealth(bicycle.bicycleParts, (_a = bicycle.dailyCommute) === null || _a === void 0 ? void 0 : _a.days.length, (_b = bicycle.dailyCommute) === null || _b === void 0 ? void 0 : _b.totalDistance, (_c = bicycle.dailyCommute) === null || _c === void 0 ? void 0 : _c.unpavedRoad, !!bicycle.recreationalCommute, (_d = bicycle.recreationalCommute) === null || _d === void 0 ? void 0 : _d.days.length, (_e = bicycle.recreationalCommute) === null || _e === void 0 ? void 0 : _e.lengthOfRide, (_f = bicycle.recreationalCommute) === null || _f === void 0 ? void 0 : _f.activityType);
             let totalSubpartHealth = 0;
-            bicycle.bicycleParts.forEach((part) => {
-                totalSubpartHealth += part.health;
+            (_g = bicycle.bicycleParts) === null || _g === void 0 ? void 0 : _g.forEach((part) => {
+                totalSubpartHealth += part === null || part === void 0 ? void 0 : part.health;
             });
-            bicycle.totalHealth = totalSubpartHealth / bicycle.bicycleParts.length;
-            (0, bicycle_query_1.bicycleHealthUpgration)(bicycle._id, bicycle);
+            bicycle.totalHealth = totalSubpartHealth / ((_h = bicycle === null || bicycle === void 0 ? void 0 : bicycle.bicycleParts) === null || _h === void 0 ? void 0 : _h.length);
+            (0, bicycle_query_1.bicycleHealthUpgration)(bicycle === null || bicycle === void 0 ? void 0 : bicycle._id, bicycle);
         });
 });
 exports.bicycleHealthAlgorithm = bicycleHealthAlgorithm;

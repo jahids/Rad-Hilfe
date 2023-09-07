@@ -34,6 +34,8 @@ const dotenv = __importStar(require("dotenv"));
 const mongoose_1 = __importDefault(require("mongoose"));
 dotenv.config({ path: __dirname + '/.env' });
 // dotenv.config();
+console.clear();
+console.log(`Time : ${new Date().toLocaleTimeString()}`);
 const app = (0, express_1.default)();
 const corsConfig = {
     origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://192.168.68.60:5173/'],

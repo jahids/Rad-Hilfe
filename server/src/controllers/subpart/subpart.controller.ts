@@ -20,7 +20,7 @@ const allSubpart = async (req: Request, res: Response) => {
   try {
     const token = req.cookies.accessToken;
     const session: SessionData | undefined = getSession(token);
-    if (session) {
+    if (token) {
       res.status(200).send(allSubparts);
       return;
     }

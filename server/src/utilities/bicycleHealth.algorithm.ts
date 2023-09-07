@@ -2,7 +2,7 @@ import moment, { Moment } from 'moment';
 import { bicycleHealthUpgration, getAllBicycle } from '../models/bicycle/bicycle.query';
 import bicycleDependency from './bicyclePartsDependency.json';
 import { BicycleParts } from '../interfaces/bicycle.interface';
-import { DependencyPart } from '../interfaces/subpart.interface';
+import { DependencyPart,Subpart } from '../interfaces/subpart.interface';
 moment().format();
 
 const damageCalculateForOnePart = (
@@ -130,6 +130,11 @@ const getDistance = (
 const bicycleHealthAlgorithm = async () => {
   const allBicycle = await getAllBicycle();
 
+
+  
+  
+  // return 0;
+  
   allBicycle &&
     allBicycle.forEach((bicycle) => {
       let lastRevisionMonth: number = bicycle.purchaseMonth;
@@ -140,26 +145,27 @@ const bicycleHealthAlgorithm = async () => {
         bicycle.revisionYear && (lastRevisionYear = bicycle.revisionYear);
       }
 
+  // console.log(`all bicycle list 1=`,allBicycle?.length);
       bicycle.bicycleParts &&
         calculatePartsHealth(
           bicycle.bicycleParts,
-          bicycle.dailyCommute.days.length,
-          bicycle.dailyCommute.totalDistance,
-          bicycle.dailyCommute.unpavedRoad,
+          bicycle.dailyCommute?.days.length,
+          bicycle.dailyCommute?.totalDistance,
+          bicycle.dailyCommute?.unpavedRoad,
           !!bicycle.recreationalCommute,
-          bicycle.recreationalCommute!.days.length,
-          bicycle.recreationalCommute!.lengthOfRide,
-          bicycle.recreationalCommute!.activityType
+          bicycle.recreationalCommute!?.days.length,
+          bicycle.recreationalCommute!?.lengthOfRide,
+          bicycle.recreationalCommute!?.activityType
         );
 
       let totalSubpartHealth = 0;
-      bicycle.bicycleParts!.forEach((part) => {
-        totalSubpartHealth += part.health;
+      bicycle.bicycleParts!?.forEach((part) => {
+        totalSubpartHealth += part?.health;
       });
 
-      bicycle.totalHealth = totalSubpartHealth / bicycle.bicycleParts!.length;
+      bicycle.totalHealth = totalSubpartHealth / bicycle?.bicycleParts!?.length;
 
-      bicycleHealthUpgration(bicycle._id, bicycle);
+      bicycleHealthUpgration(bicycle?._id, bicycle);
     });
 };
 
