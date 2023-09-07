@@ -8,7 +8,7 @@ import { technicianRouter } from './private/technician.router';
 import * as paymentController from '../controllers/paypal/paypal.controller';
 import { decodeJWT } from '../middlewares/sessionManagement';
 
-router.use(generator);
+// router.use(generator);
 router.use('/cyclist', cyclistRouter);
 router.use('/technician', technicianRouter);
 router.post('/api/create-payment', paymentController.payment);

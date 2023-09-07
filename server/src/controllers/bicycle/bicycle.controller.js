@@ -22,7 +22,7 @@ const cyclist_query_1 = require("../../models/cyclist/cyclist.query");
 const subparts_json_1 = __importDefault(require("../../models/bicycle/subparts.json"));
 const setUpBicycle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // console.log(`********************************** i am here `);
-    // return res.send("nigga")
+    // return res.send("nigga");
     try {
         const { brand, model, serialNumber, purchaseMonth, purchaseYear, isRevised, revisionMonth, revisionYear, dailyCommute, recreationalCommute, } = req.body;
         const newBicycle = {
@@ -51,17 +51,21 @@ const setUpBicycle = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         const createdBicycle = yield (0, bicycle_query_1.createBicycle)(newBicycle, lastRevisionDate);
         const token = req.cookies.accessToken;
         // console.log("fr token", token);
-        const session = (0, sessionManagement_1.getSession)(token);
+        // const session: SessionData | undefined = getSession(token);
+        const session = (0, sessionManagement_1.decodeJWT)(token);
+        // console.log(`session :`,session);
         if (session && createdBicycle) {
             const bicycleId = new database_1.Types.ObjectId(createdBicycle._id);
             yield (0, cyclist_query_1.addBicycle)(session.userEmail, bicycleId);
             res.status(201).send(createdBicycle);
             return;
         }
-        res.status(401).send("Session Unavailable!+");
+        else {
+            return res.status(401).send("Session Unavailable!+");
+        }
     }
     catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(500).send("Server Error!");
     }
 });

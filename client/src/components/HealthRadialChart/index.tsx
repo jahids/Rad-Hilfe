@@ -10,6 +10,10 @@ interface HealthData {
 }
 
 const HealthRadialChart = ({ healthData }: { healthData: HealthData[] }) => {
+
+
+  console.log(healthData);
+
   const style = {
     fontSize: 12,
     top: 21,
@@ -18,9 +22,9 @@ const HealthRadialChart = ({ healthData }: { healthData: HealthData[] }) => {
     lineHeight: '23px',
   };
 
-  let rHealthData = [...healthData];
+  const rHealthData = [...healthData];
   rHealthData.reverse();
-  let payloadData: Payload[] = rHealthData.map((data) => {
+  const payloadData: Payload[] = rHealthData.map((data) => {
     return { value: data.name };
   });
 

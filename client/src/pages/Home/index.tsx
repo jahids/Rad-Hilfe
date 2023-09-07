@@ -27,11 +27,15 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log('bike Info : ', bikeInfo);
+      const _bikeInfo_ = JSON.parse(localStorage.getItem('bikeData')!);
       const localBikeId = localStorage.getItem('bikeId');
+      
+      console.log('bike Info : ', _bikeInfo_);
 
       if (!localBikeId || !JSON.parse(localBikeId)) {
-        const result = await setUpBikeInfo(bikeInfo);
+
+        const result = await setUpBikeInfo(_bikeInfo_);
+
         if (result) {
           const bikeId = result._id;
           localStorage.setItem('bikeID', bikeId);
@@ -44,8 +48,10 @@ const Home = () => {
 
   const [healthData, setHealthData] = useState(0);
   const [name, setName] = useState('');
+
   useEffect(() => {
     const fetchData = async () => {
+
       const userInfo = await profile();
 
       const userName = userInfo.name;
@@ -77,7 +83,9 @@ const Home = () => {
 
   const [locationData, setLocationData] = useState(initialState);
   const [currentWeather, setCurrentWeather] = useState(initialWeather);
+
   const userLoctaion = navigator.geolocation;
+  
   function myGeolocator() {
     if (userLoctaion) {
       userLoctaion.getCurrentPosition(success);
@@ -94,6 +102,8 @@ const Home = () => {
 
     setLocationData({ longitude, latitude });
   }
+
+
   useEffect(() => {
     const fetchData = async () => {
       await myGeolocator();

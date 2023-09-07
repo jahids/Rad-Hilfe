@@ -83,7 +83,7 @@ const bicycleHealthAlgorithm = () => __awaiter(void 0, void 0, void 0, function*
                 bicycle.revisionMonth && (lastRevisionMonth = bicycle.revisionMonth);
                 bicycle.revisionYear && (lastRevisionYear = bicycle.revisionYear);
             }
-            console.log(`all bicycle list 1=`, allBicycle === null || allBicycle === void 0 ? void 0 : allBicycle.length);
+            // console.log(`all bicycle list 1=`,allBicycle?.length);
             bicycle.bicycleParts &&
                 calculatePartsHealth(bicycle.bicycleParts, (_a = bicycle.dailyCommute) === null || _a === void 0 ? void 0 : _a.days.length, (_b = bicycle.dailyCommute) === null || _b === void 0 ? void 0 : _b.totalDistance, (_c = bicycle.dailyCommute) === null || _c === void 0 ? void 0 : _c.unpavedRoad, !!bicycle.recreationalCommute, (_d = bicycle.recreationalCommute) === null || _d === void 0 ? void 0 : _d.days.length, (_e = bicycle.recreationalCommute) === null || _e === void 0 ? void 0 : _e.lengthOfRide, (_f = bicycle.recreationalCommute) === null || _f === void 0 ? void 0 : _f.activityType);
             let totalSubpartHealth = 0;

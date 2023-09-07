@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.generator = void 0;
 const bicycleHealth_algorithm_1 = require("../utilities/bicycleHealth.algorithm");
 const generator = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(`Time = ${new Date().toLocaleTimeString()}`);
+    // console.log(`Time = ${new Date().toLocaleTimeString()}`);
     yield (0, bicycleHealth_algorithm_1.bicycleHealthAlgorithm)();
     next();
 });

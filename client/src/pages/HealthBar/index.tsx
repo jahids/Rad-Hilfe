@@ -12,8 +12,10 @@ function HealthBar() {
   const [bicycleH, setBicycleH] = useState();
 
   useEffect(() => {
-    let categoryHealth: any[] = [];
+    const categoryHealth: any[] = [];
+
     const fetchData = async () => {
+      
       const bicycleId = localStorage.getItem('bikeID');
       const data = await bicycle(bicycleId);
 

@@ -127,8 +127,11 @@ const getDistance = (
   return way * moment().diff(lastMaintainedDate, 'week') * rodeDay * rodeDistance * rideFactor;
 };
 
+
 const bicycleHealthAlgorithm = async () => {
   const allBicycle = await getAllBicycle();
+
+  
 
 
   

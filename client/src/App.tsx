@@ -36,7 +36,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path='/login' element={<Login />} />
+          <Route index path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/thankyou' element={<ThankYou></ThankYou>}></Route>
 

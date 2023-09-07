@@ -10,7 +10,7 @@ import {
 	getBicycleById,
 	updateBicycle,
 } from "../../models/bicycle/bicycle.query";
-import { getSession } from "../../middlewares/sessionManagement";
+import { decodeJWT, getSession } from "../../middlewares/sessionManagement";
 import { SessionData } from "../../interfaces/session.interface";
 import { addBicycle } from "../../models/cyclist/cyclist.query";
 
@@ -21,7 +21,7 @@ const setUpBicycle = async (req: Request, res: Response) => {
 
 	// console.log(`********************************** i am here `);
 
-	// return res.send("nigga")
+	// return res.send("nigga");
 	try {
 		const {
 			brand,
@@ -71,20 +71,22 @@ const setUpBicycle = async (req: Request, res: Response) => {
 		const token = req.cookies.accessToken;
 		// console.log("fr token", token);
 
-		const session: SessionData | undefined = getSession(token);
-
-		
+		// const session: SessionData | undefined = getSession(token);
+		const session: any = decodeJWT(token);
+		// console.log(`session :`,session);
 
 		if (session && createdBicycle) {
 			const bicycleId = new Types.ObjectId(createdBicycle!._id);
 			await addBicycle(session.userEmail, bicycleId);
 			res.status(201).send(createdBicycle);
 			return;
+		}else{
+
+			return res.status(401).send("Session Unavailable!+");
 		}
 
-		res.status(401).send("Session Unavailable!+");
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
 		res.status(500).send("Server Error!");
 	}
 };

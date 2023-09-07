@@ -5,6 +5,7 @@ import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 import { ArrowBackIcon, CheckCircleIcon } from '@chakra-ui/icons'
 import { useEffect } from 'react'
 import { passiveCase } from '../../services/cases'
+import CustomInstance from '../../lib/axios'
 
 export default function Success() {
     const [queryParameters] = useSearchParams();
