@@ -5,3 +5,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.react-mapbox-ac-menu {
+  width: auto;
+  position: absolute;
+  z-index: 9999;
+  background-color: hsla(0,0%,13%,1) !important ;
+  border: 1px solid #ccc;
+  margin-top: -1.3rem;
+}
