@@ -17,6 +17,11 @@ import { addBicycle } from "../../models/cyclist/cyclist.query";
 import Subparts from "../../models/bicycle/subparts.json";
 
 const setUpBicycle = async (req: Request, res: Response) => {
+
+
+	// console.log(`********************************** i am here `);
+
+	// return res.send("nigga")
 	try {
 		const {
 			brand,
@@ -64,9 +69,12 @@ const setUpBicycle = async (req: Request, res: Response) => {
 		);
 
 		const token = req.cookies.accessToken;
-		console.log("fr token", token);
+		// console.log("fr token", token);
 
 		const session: SessionData | undefined = getSession(token);
+
+		
+
 		if (session && createdBicycle) {
 			const bicycleId = new Types.ObjectId(createdBicycle!._id);
 			await addBicycle(session.userEmail, bicycleId);
@@ -74,7 +82,7 @@ const setUpBicycle = async (req: Request, res: Response) => {
 			return;
 		}
 
-		res.status(401).send("Session Unavailable!");
+		res.status(401).send("Session Unavailable!+");
 	} catch (error) {
 		console.log(error);
 		res.status(500).send("Server Error!");

@@ -10,11 +10,15 @@ const cyclistSchema = new database_1.Schema({
     homeAddress: { type: String, required: false },
     workAddress: { type: String, required: false },
     phone: { type: String, required: false },
-    bicycle: { type: database_1.Types.ObjectId, ref: 'BicycleModel' },
-    plan: { type: String, enum: ['Basic', 'Qover', 'Slipstream'], required: true },
-    orders: [{ type: database_1.Types.ObjectId, ref: 'OrderModel' }],
-    cases: [{ type: database_1.Types.ObjectId, ref: 'CaseModel' }],
+    bicycle: { type: database_1.Types.ObjectId, ref: "BicycleModel" },
+    plan: {
+        type: String,
+        enum: ["Basic", "Qover", "Slipstream"],
+        required: true,
+    },
+    orders: [{ type: database_1.Types.ObjectId, ref: "OrderModel" }],
+    cases: [{ type: database_1.Types.ObjectId, ref: "CaseModel" }],
     imageUrl: { type: String },
 });
-const CyclistModel = (0, database_1.model)('Cyclist', cyclistSchema);
+const CyclistModel = (0, database_1.model)("Cyclist", cyclistSchema);
 exports.CyclistModel = CyclistModel;

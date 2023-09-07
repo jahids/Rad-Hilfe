@@ -19,7 +19,7 @@ const authenticator = (req, res, next) => __awaiter(void 0, void 0, void 0, func
     }
     const existingSession = (0, sessionManagement_1.getSession)(token);
     if (!existingSession) {
-        res.status(400).send('Session does not exist!');
+        res.status(400).send('Session does not exist!  1');
         return;
     }
     next();

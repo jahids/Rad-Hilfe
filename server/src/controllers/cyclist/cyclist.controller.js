@@ -60,10 +60,13 @@ const signIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return;
         }
         const token = (0, sessionManagement_1.createSession)(email);
+        const THIRTY_DAYS = 30 * 24 * 3600000;
         res.cookie("accessToken", token, {
-            httpOnly: false,
-            secure: false,
-            sameSite: "strict",
+            // httpOnly: false,
+            // secure: false,
+            // sameSite: "strict",
+            httpOnly: true,
+            maxAge: THIRTY_DAYS
         });
         res.status(200).send({ accessToken: token });
     }

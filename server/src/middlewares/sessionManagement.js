@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.destroySession = exports.getSession = exports.createSession = void 0;
+exports.decodeJWT = exports.destroySession = exports.getSession = exports.createSession = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const path_1 = __importDefault(require("path"));
 const dotenv = __importStar(require("dotenv"));
@@ -60,6 +60,17 @@ const getSession = (token) => {
     }
 };
 exports.getSession = getSession;
+const decodeJWT = (token) => {
+    try {
+        const tokenData = jsonwebtoken_1.default.verify(token, SECRET_KEY);
+        return tokenData;
+    }
+    catch (error) {
+        console.error('Error verifying token:', error);
+        return undefined;
+    }
+};
+exports.decodeJWT = decodeJWT;
 const destroySession = (token) => {
     blockedList.push(token);
     return true;

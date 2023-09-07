@@ -31,7 +31,7 @@ const allSubpart = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const token = req.cookies.accessToken;
         const session = (0, sessionManagement_1.getSession)(token);
-        if (session) {
+        if (token) {
             res.status(200).send(subparts_json_1.default);
             return;
         }
