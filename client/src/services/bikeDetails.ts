@@ -1,23 +1,45 @@
 /* eslint-disable  */
 import axios from "axios";
+import CustomInstance from "../lib/axios";
 const BASE_URL = "http://localhost:4000";
 const token = localStorage.getItem("accessToken");
 
+
 export const setUpBikeInfo = async (bikeinfo: any) => {
 	try {
-		const response = await fetch(`${BASE_URL}/cyclist/set-up-bicycle`, {
-			method: "POST",
-			credentials: "include",
-			mode: "cors",
-			headers: {
-				"Content-Type": "application/json",
-				authorization: `Bearer ${token}`,
-			},
-			body: JSON.stringify(bikeinfo),
-		});
-		const bike = await response.json();
-		console.log("bike from service", bike);
-		return bike;
+		// const response = await fetch(`${BASE_URL}/cyclist/set-up-bicycle`, {
+		// 	method: "POST",
+		// 	credentials: "include",
+		// 	mode: "cors",
+		// 	headers: {
+		// 		"Content-Type": "application/json",
+		// 		authorization: `Bearer ${token}`,
+		// 	},
+		// 	body: JSON.stringify(bikeinfo),
+		// });
+		// const bike = await response.json();
+		// console.log("bike from service", bike);
+		// return bike;
+		const data = {
+			"brand": "BMC",
+			"model": "Domane",
+			"serialNumber": 2324234,
+			"purchaseMonth": 5,
+			"purchaseYear": 2023,
+			"isRevised": false,
+			"revisionMonth": 0,
+			"revisionYear": 0,
+			"dailyCommute":[],
+			"recreationalCommute":[],
+			"bicycleParts" : '',
+			'totalHealth': ''
+		};
+		const res = await CustomInstance.post(`/cyclist/set-up-bicycle`,data);
+
+		console.log(`🎈🎈🎈🎆🎈🎈🎈🎈🎈`,'new  bike created')
+		
+		return res.data;
+
 	} catch (error) {
 		console.log(error);
 	}
